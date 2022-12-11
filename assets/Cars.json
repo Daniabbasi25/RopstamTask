@@ -3,12 +3,14 @@
     "name": "Toyota",
     "model": "780",
     "make": "makevalue",
-    "registration-no": "12345"
+    "registration-no": "12345",
+    "image": "imagelinkhere"
   },
   {
     "name": "Toyota",
     "model": "780",
     "make": "makevalue",
-    "registration-no": "12345"
+    "registration-no": "12345",
+    "image": "imagelinkhere"
   }
 ]
