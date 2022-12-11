@@ -11,26 +11,30 @@ import TextField from '../../components/TextField';
 import PrimaryButton from '../../components/PrimaryButton';
 import * as Users from '../../../assets/user.json';
 const SignUpScreen = ({navigation}) => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const handlesignup = () => {
     // alert(name + email + password);
     console.log(Users.default);
-    const alreadyExist = Users.default.find(item => item.email == email);
+    if (name.length > 0 && email.length > 0 && password.length > 0) {
+      const alreadyExist = Users.default.find(item => item.email == email);
 
-    if (alreadyExist == undefined) {
-      Users.default.push({
-        name: name,
-        email: email,
-        password: password,
-      });
-      alert('sign Up successfull use your email & password to login now');
-      navigation.navigate('Login');
-      console.log('my new user data=', Users.default);
+      if (alreadyExist == undefined) {
+        Users.default.push({
+          name: name,
+          email: email,
+          password: password,
+        });
+        alert('sign Up successfull use your email & password to login now');
+        navigation.navigate('Login');
+        console.log('my new user data=', Users.default);
+      } else {
+        console.log('Already exist', alreadyExist);
+        alert('Uer with this email already exist');
+      }
     } else {
-      console.log('Already exist', alreadyExist);
-      alert('Uer with this email already exist');
+      alert('fill form properly');
     }
   };
   return (

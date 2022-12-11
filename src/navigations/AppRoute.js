@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -8,13 +8,16 @@ import HomeScreen from '../screens/HomeScreen';
 import AddCar from '../screens/AddCar';
 import {CarProvider} from '../hooks/useCar';
 import {Provider} from 'react-native-paper';
+import useAuth, {AuthProvider} from '../hooks/useAuth';
 const Stack = createNativeStackNavigator();
 
 const AppRoute = () => {
+  const {islogin, logout} = useAuth();
+  console.log('My is login=', islogin);
   return (
     <Provider>
-      <CarProvider>
-        <NavigationContainer>
+      <NavigationContainer>
+        {!islogin ? (
           <Stack.Navigator initialRouteName="Login">
             <Stack.Screen
               name="Login"
@@ -22,12 +25,35 @@ const AppRoute = () => {
               options={{headerShown: false}}
             />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
-
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="AddCar" component={AddCar} />
           </Stack.Navigator>
-        </NavigationContainer>
-      </CarProvider>
+        ) : (
+          <>
+            <CarProvider>
+              <Stack.Navigator initialRouteName="Home">
+                <Stack.Screen
+                  name="Home"
+                  component={HomeScreen}
+                  options={{
+                    headerRight: () => (
+                      <TouchableOpacity
+                        onPress={logout}
+                        style={{
+                          paddingHorizontal: 20,
+
+                          backgroundColor: 'red',
+                          paddingVertical: 5,
+                        }}>
+                        <Text style={{color: '#fff'}}>LogOut</Text>
+                      </TouchableOpacity>
+                    ),
+                  }}
+                />
+                <Stack.Screen name="AddCar" component={AddCar} />
+              </Stack.Navigator>
+            </CarProvider>
+          </>
+        )}
+      </NavigationContainer>
     </Provider>
   );
 };

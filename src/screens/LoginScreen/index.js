@@ -11,10 +11,12 @@ import React, {useState} from 'react';
 import TextField from '../../components/TextField';
 import PrimaryButton from '../../components/PrimaryButton';
 import * as Users from '../../../assets/user.json';
+import useAuth from '../../hooks/useAuth';
 const {width, height} = Dimensions.get('window');
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const {addUser} = useAuth();
   const handlelogin = () => {
     // alert("Login")
     // navigation.navigate('MainStack');
@@ -23,7 +25,9 @@ const LoginScreen = ({navigation}) => {
     );
     if (find != undefined) {
       alert('Login Successfull');
-      navigation.navigate('Home');
+      // navigation.navigate('Home');
+      addUser(find);
+      console.log(find);
     } else {
       alert('Email or Pasword is Incorest Try again');
     }
