@@ -23,6 +23,7 @@ const LoginScreen = ({navigation}) => {
     );
     if (find != undefined) {
       alert('Login Successfull');
+      navigation.navigate('Home');
     } else {
       alert('Email or Pasword is Incorest Try again');
     }
