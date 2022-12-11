@@ -5,21 +5,27 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LoginSCreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUp';
 import HomeScreen from '../screens/HomeScreen';
+import AddCar from '../screens/AddCar';
+import {CarProvider} from '../hooks/useCar';
 const Stack = createNativeStackNavigator();
 
 const AppRoute = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={LoginSCreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <CarProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen
+            name="Login"
+            component={LoginSCreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="AddCar" component={AddCar} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </CarProvider>
   );
 };
 
