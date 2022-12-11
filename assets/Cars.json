@@ -3,16 +3,14 @@
     "id": 1,
     "name": "Toyota",
     "model": "780",
-    "make": "makevalue",
-    "registration-no": "12345",
-    "image": "imagelinkhere"
+    "make": "Toyota",
+    "registration_no": "12345"
   },
   {
     "id": 2,
     "name": "Toyota",
     "model": "780",
-    "make": "makevalue",
-    "registration-no": "12345",
-    "image": "imagelinkhere"
+    "make": "BMW",
+    "registration_no": "12345"
   }
 ]

@@ -14,30 +14,45 @@ import useCar from '../../hooks/useCar';
 const {width, height} = Dimensions.get('window');
 const HomeScreen = ({navigation}) => {
   const {deleteCarItem, cars} = useCar();
-  // const [cars, setcars] = useState(cars);
   const handleEdit = item => {
     console.log(item);
     navigation.navigate('AddCar', {item});
   };
-  // const handledelete = id => {
-  //   console.log(id);
-  //   const newdata = cars.filter(item => item.id != id);
-  //   setcars(newdata);
-  // };
+
   const Item = ({item}) => (
     <View style={styles.item}>
-      <Text style={styles.title}>{item.name}</Text>
-
-      <TouchableOpacity onPress={() => deleteCarItem(item.id)}>
-        <View style={{backgroundColor: 'red', padding: 10, color: '#fff'}}>
-          <Icon name="trash" size={20} color="#fff" />
+      <View>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={styles.label}>Name:</Text>
+          <Text style={styles.title}>{item.name}</Text>
         </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handleEdit(item)}>
-        <View style={{backgroundColor: 'green', padding: 10, color: '#fff'}}>
-          <Icon name="edit" size={20} color="#fff" />
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={styles.label}>Make:</Text>
+          <Text style={styles.title}>{item.make}</Text>
         </View>
-      </TouchableOpacity>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={styles.label}>Model:</Text>
+          <Text style={styles.title}>{item.model}</Text>
+        </View>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={styles.label}>Reg#:</Text>
+          <Text style={styles.title}>{item.registration_no}</Text>
+        </View>
+      </View>
+      <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity
+          onPress={() => deleteCarItem(item.id)}
+          style={{marginRight: 5}}>
+          <View style={{backgroundColor: 'red', padding: 10, color: '#fff'}}>
+            <Icon name="trash" size={20} color="#fff" />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleEdit(item)}>
+          <View style={{backgroundColor: 'green', padding: 10, color: '#fff'}}>
+            <Icon name="edit" size={20} color="#fff" />
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
   const renderItem = ({item}) => <Item item={item} />;
@@ -69,7 +84,6 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginTop: StatusBar.currentHeight || 0,
   },
   item: {
     backgroundColor: 'lightblue',
@@ -77,11 +91,19 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
-  title: {
-    fontSize: 32,
+  label: {
+    fontSize: 20,
     color: '#000',
+    fontWeight: 'bold',
+  },
+  title: {
+    fontSize: 18,
+    color: '#000',
+
+    fontWeight: '400',
+    marginLeft: 10,
   },
 });
