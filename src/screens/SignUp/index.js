@@ -9,14 +9,29 @@ import {
 import React, {useState} from 'react';
 import TextField from '../../components/TextField';
 import PrimaryButton from '../../components/PrimaryButton';
-
+import * as Users from '../../../assets/user.json';
 const SignUpScreen = ({navigation}) => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [number, setNumber] = useState();
   const handlesignup = () => {
-    alert(name + email + password + number);
+    // alert(name + email + password);
+    console.log(Users.default);
+    const alreadyExist = Users.default.find(item => item.email == email);
+
+    if (alreadyExist == undefined) {
+      Users.default.push({
+        name: name,
+        email: email,
+        password: password,
+      });
+      alert('sign Up successfull use your email & password to login now');
+      navigation.navigate('Login');
+      console.log('my new user data=', Users.default);
+    } else {
+      console.log('Already exist', alreadyExist);
+      alert('Uer with this email already exist');
+    }
   };
   return (
     <View style={{backgroundColor: '#fff', flex: 1}}>
@@ -40,13 +55,7 @@ const SignUpScreen = ({navigation}) => {
         val={password}
         setvalue={setPassword}
       />
-      <TextField
-        label="Phone Number"
-        placeholder="0334 xxxx xxxx"
-        keyboardtype="phone-pad"
-        val={number}
-        setvalue={setNumber}
-      />
+
       <View style={styles.buttonBox}>
         <PrimaryButton buttonText="Sign Up" buttonFunction={handlesignup} />
       </View>
